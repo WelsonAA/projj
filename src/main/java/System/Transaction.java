@@ -1,17 +1,26 @@
 package System;
 
+import java.util.Date;
+
 public class Transaction {
-    private Double Amount;
+    private Double TransactionAmount;
     private Integer TransactionID;
+    private Date TransactionDate;
     static Integer id=0;
     public Transaction(){}
-    public Transaction(Double amount) {
-        Amount = amount;
-        TransactionID =id++ ;
+
+    public Date getTransactionDate() {
+        return TransactionDate;
     }
 
-    public Double getAmount() {
-        return Amount;
+    public Transaction(Double amount, Date TransactionDate) {
+        TransactionAmount = amount;
+        TransactionID =id++ ;
+        this.TransactionDate=TransactionDate;
+    }
+
+    public Double getTransactionAmount() {
+        return TransactionAmount;
     }
 
     public Integer getTransactionID() {
