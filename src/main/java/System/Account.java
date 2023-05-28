@@ -16,6 +16,7 @@ public class Account {
     private String TelephoneNo;
     private String Email;
     ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
+    ArrayList<Bill> Bills=new ArrayList<Bill>();
 
     public Account(String userName, String password, Double balance, Date birthDate) {
         UserName = userName;
