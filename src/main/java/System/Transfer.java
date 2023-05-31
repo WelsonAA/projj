@@ -1,11 +1,11 @@
 package System;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transfer extends Transaction{
     private String ReceiverAccountNo;
 
-    public Transfer(Double amount, Date TransactionDate, String receiverAccountNo) {
+    public Transfer(Double amount, LocalDate TransactionDate, String receiverAccountNo) {
         super(amount, TransactionDate);
         ReceiverAccountNo = receiverAccountNo;
     }

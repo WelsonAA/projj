@@ -1,12 +1,12 @@
 package System;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Withdraw extends Transaction{
     public Withdraw() {
     }
 
-    public Withdraw(Double amount, Date TransactionDate) {
+    public Withdraw(Double amount, LocalDate TransactionDate) {
         super(amount, TransactionDate);
     }
 }

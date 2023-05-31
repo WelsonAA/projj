@@ -1,19 +1,19 @@
 package System;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transaction {
     private Double TransactionAmount;
     private Integer TransactionID;
-    private Date TransactionDate;
+    private LocalDate TransactionDate;
     static Integer id=0;
     public Transaction(){}
 
-    public Date getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return TransactionDate;
     }
 
-    public Transaction(Double amount, Date TransactionDate) {
+    public Transaction(Double amount, LocalDate TransactionDate) {
         TransactionAmount = amount;
         TransactionID =id++ ;
         this.TransactionDate=TransactionDate;

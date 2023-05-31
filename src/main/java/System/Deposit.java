@@ -1,12 +1,12 @@
 package System;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Deposit extends Transaction {
     public Deposit() {
     }
 
-    public Deposit(Double amount, Date TransactionDate) {
+    public Deposit(Double amount, LocalDate TransactionDate) {
         super(amount, TransactionDate);
     }
 }

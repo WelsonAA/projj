@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="365.0" fitWidth="544.0" pickOnBounds="true">
          <image>
-            <Image url="@../img/background.jpg" />
+            <Image url="@../../../background.jpg" />
          </image>
       </ImageView>
       <Label layoutX="79.0" layoutY="77.0" prefHeight="41.0" prefWidth="122.0" text="Current Balance:" textFill="WHITE">
@@ -20,7 +20,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="234.0" layoutY="85.0" />
+      <TextField editable="false" layoutX="234.0" layoutY="85.0" />
       <Button layoutX="383.0" layoutY="190.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="122.0" text="Home">
          <font>
             <Font size="16.0" />

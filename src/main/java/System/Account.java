@@ -1,16 +1,17 @@
 package System;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Account {
-    private String AccountNo;
+    private Integer AccountNo;
     private String UserName;
     private String Password;
     private Double Balance;
-    private Date BirthDate;
+    private LocalDate BirthDate;
     private String Address;
     private String ZipCode;
+    static int id=0;
     private String SSN;
     private String CardNo;
     private String TelephoneNo;
@@ -18,14 +19,48 @@ public class Account {
     ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
     ArrayList<Bill> Bills=new ArrayList<Bill>();
 
-    public Account(String userName, String password, Double balance, Date birthDate) {
+    private void withdraw(Double amount){
+        Withdraw w =new Withdraw(amount,LocalDate.now());
+        Transactions.add(w);
+        if(amount>Balance){
+            //Error
+        }else {
+            this.Balance -= amount;
+        }
+    }
+    private void deposit(Double amount){
+        Deposit d =new Deposit(amount,LocalDate.now());
+        Transactions.add(d);
+        this.Balance+=amount;
+    }
+
+    private void transfer(Double amount,String receiverAccountNo){
+        Transfer t =new Transfer(amount,LocalDate.now(),receiverAccountNo);
+        Transactions.add(t);
+        if(amount>Balance){
+            //Error
+        }else {
+            this.Balance -= amount;
+        }
+    }
+    private void payBill(Double amount, String description,String billType){
+        Bill b=new Bill(amount,description,billType,LocalDate.now());
+        Bills.add(b);
+        if(amount>Balance){
+            //Error
+        }else {
+            this.Balance -= amount;
+        }
+    }
+    public Account(String userName, String password, Double balance, LocalDate birthDate) {
         UserName = userName;
         Password = password;
         Balance = balance;
         BirthDate = birthDate;
+        AccountNo=id++;
     }
 
-    public String getAccountNo() {
+    public Integer getAccountNo() {
         return AccountNo;
     }
 
@@ -41,9 +76,7 @@ public class Account {
         return Balance;
     }
 
-    public Date getBirthDate() {
-        return BirthDate;
-    }
+
 
     public String getAddress() {
         return Address;

@@ -11,7 +11,7 @@
     <children>
         <ImageView fitHeight="500.0" fitWidth="708.0" layoutX="-20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../img/background.jpg" />
+                <Image url="@../../../background.jpg" />
             </image>
         </ImageView>
         <Label layoutX="14.0" layoutY="93.0" prefHeight="337.0" prefWidth="452.0">

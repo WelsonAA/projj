@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="835.0" fitWidth="965.0" layoutX="-132.0" layoutY="-26.0" pickOnBounds="true" AnchorPane.bottomAnchor="-38.0" AnchorPane.leftAnchor="-132.0" AnchorPane.rightAnchor="-65.0" AnchorPane.topAnchor="-26.0">
          <image>
-            <Image url="@../img/background.jpg" />
+            <Image url="@../../../background.jpg" />
          </image>
       </ImageView>
       <Button layoutX="499.0" layoutY="607.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="223.0" text="Submit">

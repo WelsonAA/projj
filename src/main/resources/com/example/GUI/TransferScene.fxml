@@ -12,7 +12,7 @@
 
       <ImageView fitHeight="400.0" fitWidth="627.0" pickOnBounds="true" preserveRatio="true">
 
-            <Image url="@../img/background.jpg" />
+            <Image url="@../../../background.jpg" />
 
       </ImageView>
       <Button layoutX="458.0" layoutY="358.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="128.0" text="Home" />
