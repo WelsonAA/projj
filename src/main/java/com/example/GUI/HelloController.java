@@ -47,6 +47,8 @@ public class HelloController {
     private TextField passwd;
     @FXML
     private TextField email;
+    @FXML
+    private Button transactionmenu;
 
     @FXML
     void goshowbalance(ActionEvent event) throws Exception {
@@ -175,6 +177,15 @@ public class HelloController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    @FXML
+    void gotransactionhome(ActionEvent event) throws Exception {
+        Stage stage = (Stage) transactionmenu.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
+
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 
 
