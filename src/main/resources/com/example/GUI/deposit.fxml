@@ -26,7 +26,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="homebalance" layoutX="83.0" layoutY="255.0" mnemonicParsing="false" onAction="#gohomefrombalance" prefHeight="82.0" prefWidth="142.0" text="Home">
+      <Button fx:id="transactionmenu" layoutX="46.0" layoutY="252.0" mnemonicParsing="false" onAction="#gotransactionhome" prefHeight="82.0" prefWidth="227.0" text="Transaction Menu">
          <font>
             <Font size="24.0" />
          </font>
