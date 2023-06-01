@@ -14,22 +14,22 @@
          </image>
       </ImageView>
 
-      <Button layoutX="117.0" layoutY="70.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="257.0" text="Withdraw">
+      <Button fx:id="withdraw" layoutX="117.0" layoutY="70.0" mnemonicParsing="false" onAction="#gowithdraw" prefHeight="77.0" prefWidth="257.0" text="Withdraw">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="117.0" layoutY="175.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="257.0" text="Deposit">
+      <Button fx:id="deposit" layoutX="117.0" layoutY="175.0" mnemonicParsing="false" onAction="#godeposit" prefHeight="77.0" prefWidth="257.0" text="Deposit">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="117.0" layoutY="285.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="257.0" text="Transfer">
+      <Button fx:id="transfer" layoutX="117.0" layoutY="285.0" mnemonicParsing="false" onAction="#gotransfer" prefHeight="77.0" prefWidth="257.0" text="Transfer">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="118.0" layoutY="399.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="257.0" text="Home">
+      <Button fx:id="homebalance" layoutX="118.0" layoutY="399.0" mnemonicParsing="false" onAction="#gohomefrombalance" prefHeight="77.0" prefWidth="257.0" text="Home">
          <font>
             <Font size="18.0" />
          </font>

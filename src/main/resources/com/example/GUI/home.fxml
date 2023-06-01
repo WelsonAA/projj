@@ -16,12 +16,12 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="445.0" layoutY="79.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Transaction" />
-      <Button layoutX="99.0" layoutY="79.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Show Balance" />
-      <Button layoutX="99.0" layoutY="160.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Bills" />
-      <Button layoutX="445.0" layoutY="160.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Purchase items" />
-      <Button layoutX="99.0" layoutY="248.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Notifications" />
-      <Button layoutX="445.0" layoutY="248.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="Bank Statement" />
+      <Button fx:id="transaction" layoutX="445.0" layoutY="79.0" mnemonicParsing="false" onAction="#gotransaction" prefHeight="44.0" prefWidth="183.0" text="Transaction" />
+      <Button fx:id="showbalance" layoutX="99.0" layoutY="79.0" mnemonicParsing="false" onAction="#goshowbalance" prefHeight="44.0" prefWidth="183.0" text="Show Balance" />
+      <Button fx:id="bills" layoutX="99.0" layoutY="160.0" mnemonicParsing="false" onAction="#gobills" prefHeight="44.0" prefWidth="183.0" text="Bills" />
+      <Button fx:id="purchaseitem" layoutX="445.0" layoutY="160.0" mnemonicParsing="false" onAction="#gopurchaseitems" prefHeight="44.0" prefWidth="183.0" text="Purchase items" />
+      <Button fx:id="notifications" layoutX="99.0" layoutY="248.0" mnemonicParsing="false" onAction="#gonotifications" prefHeight="44.0" prefWidth="183.0" text="Notifications" />
+      <Button fx:id="bankstatement" layoutX="445.0" layoutY="248.0" mnemonicParsing="false" onAction="#gobankstatement" prefHeight="44.0" prefWidth="183.0" text="Bank Statement" />
       <Button layoutX="574.0" layoutY="377.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="128.0" text="Log Out" />
       <Button layoutX="14.0" layoutY="377.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="128.0" text="Help" />
 

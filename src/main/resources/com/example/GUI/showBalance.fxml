@@ -21,7 +21,7 @@
          </font>
       </Label>
       <TextField editable="false" layoutX="234.0" layoutY="85.0" />
-      <Button layoutX="383.0" layoutY="190.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="122.0" text="Home">
+      <Button fx:id="homebalance" layoutX="383.0" layoutY="190.0" mnemonicParsing="false" onAction="#gohomefrombalance" prefHeight="84.0" prefWidth="122.0" text="Home">
          <font>
             <Font size="16.0" />
          </font>

@@ -3,20 +3,23 @@ package System;
 import java.time.LocalDate;
 
 public class Transaction {
-    private Double TransactionAmount;
-    private Integer TransactionID;
-    private LocalDate TransactionDate;
+    protected Double TransactionAmount;
+    protected Integer TransactionID;
+    protected LocalDate TransactionDate;
     static Integer id=0;
+    protected Double BalanceBefore;
+    protected Double BalanceAfter;
     public Transaction(){}
 
     public LocalDate getTransactionDate() {
         return TransactionDate;
     }
 
-    public Transaction(Double amount, LocalDate TransactionDate) {
+    public Transaction(Double amount, LocalDate TransactionDate,Double BalanceBefore) {
         TransactionAmount = amount;
         TransactionID =id++ ;
         this.TransactionDate=TransactionDate;
+        this.BalanceBefore=BalanceBefore;
     }
 
     public Double getTransactionAmount() {

@@ -1,15 +1,19 @@
 package System;
 
-public class Item {
-    private Double price;
-    private String name;
-    private String description;
-    private String itemType; //
 
-    public Item(Double price, String name, String description, String itemType) {
-        this.price = price;
-        this.name = name;
-        this.description = description;
-        this.itemType = itemType;
-    }
+
+
+public record Item(Double amount,String storeName,String itemName){
 }
+/*
+public class Item {
+    private Double amount;
+    private String storeName;
+    private String itemName;
+
+    public Item(Double amount, String storeName,String itemName) {
+        this.amount = amount;
+        this.storeName = storeName;
+        this.itemName=itemName;
+    }
+}*/
