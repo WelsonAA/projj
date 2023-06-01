@@ -25,7 +25,7 @@ public class Account {
     ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
     ArrayList<Bill> Bills=new ArrayList<Bill>();
 
-    private void withdraw(Double amount){
+    public void withdraw(Double amount){
         if(amount>Balance){
             //Error
         }else {
@@ -34,13 +34,13 @@ public class Account {
             this.Balance -= amount;
         }
     }
-    private void deposit(Double amount){
+    public void deposit(Double amount){
         Deposit d =new Deposit(amount,LocalDate.now(),this.getBalance());
         Transactions.add(d);
         this.Balance+=amount;
     }
 
-    private void transfer(Double amount,String receiverAccountNo){
+    public void transfer(Double amount,String receiverAccountNo){
 
         if(amount>Balance){
             //Error
@@ -50,7 +50,7 @@ public class Account {
             this.Balance -= amount;
         }
     }
-    private void payBill(Double amount, String description,BillType bt){
+    public void payBill(Double amount, String description,BillType bt){
         if(amount>Balance){
             //Error
         }else {
@@ -59,7 +59,7 @@ public class Account {
             this.Balance -= amount;
         }
     }
-    private void purchaseItem(Double amount,String storeName,String itemName){
+    public void purchaseItem(Double amount,String storeName,String itemName){
         if(amount>Balance){
             //Error
         }else {
@@ -76,14 +76,18 @@ public class Account {
         return Objects.equals(getAccountNo(), account.getAccountNo());
     }
 
-    private void printBankStatement(){
+    public void printBankStatement(){
     }
     public Account(String userName, String password, Double balance, LocalDate birthDate) {
         UserName = userName;
         Password = password;
-        Balance = balance;
         BirthDate = birthDate;
         AccountNo=id++;
+        if(balance<=0.0){
+            Balance=0.0;
+        }else{
+            this.Balance = balance;
+        }
     }
 
     public Integer getAccountNo() {
