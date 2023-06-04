@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="411.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.HelloController">
+    <children>
+        <Text fill="WHITE" layoutX="131.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Online Banking System" />
+        <Text boundsType="VISUAL" fill="#4538ff" fontSmoothingType="LCD" layoutX="168.0" layoutY="329.0" stroke="#ff9933" strokeType="OUTSIDE" strokeWidth="0.5" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="430.2266845703125">
+            <font>
+                <Font name="Verdana Bold" size="24.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="486.0" fitWidth="625.0" layoutX="-8.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" scaleZ="1000.0">
+            <image>
+                <Image url="@../background.jpg" />
+            </image>
+            <viewport>
+                <Rectangle2D height="100.0" />
+            </viewport>
+            <cursor>
+                <Cursor fx:constant="E_RESIZE" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="436.0" fitWidth="414.0" focusTraversable="true" layoutX="294.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../service.jpg" />
+            </image>
+        </ImageView>
+        <Text fill="WHITE" layoutX="-14.0" layoutY="68.0" stroke="WHITE" strokeType="OUTSIDE" text="Online Banking System" textAlignment="CENTER" wrappingWidth="326.3569641113281">
+            <font>
+                <Font name="Verdana" size="30.0" />
+            </font>
+        </Text>
+        <Button layoutX="135.0" layoutY="340.0" minHeight="12.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="sign up" />
+        <Button fx:id="login" layoutX="135.0" layoutY="283.0" minHeight="12.0" mnemonicParsing="false" onAction="#gohome" prefHeight="34.0" prefWidth="110.0" text="login" />
+        <Text fill="WHITE" layoutX="51.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+        <Text fill="WHITE" layoutX="37.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+    </children>
+</AnchorPane>
