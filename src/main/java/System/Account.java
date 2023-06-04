@@ -12,11 +12,9 @@ public class Account {
     private LocalDate BirthDate;
     private String Address;
     private String ZipCode;
-
     public LocalDate getBirthDate() {
         return BirthDate;
     }
-
     static int id=0;
     private String SSN;
     private String CardNo;

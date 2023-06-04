@@ -2,7 +2,7 @@ package System;
 
 import java.util.ArrayList;
 
-final class Bank {
+public final class Bank {
     private final String Name;
     private final String Address;
     private static ArrayList<Account> Accounts=new ArrayList<>();

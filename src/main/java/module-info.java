@@ -10,6 +10,6 @@ module com.example.testingproj {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.GUI to javafx.fxml;
-    exports com.example.GUI;
+    opens GUI to javafx.fxml;
+    exports GUI;
 }
