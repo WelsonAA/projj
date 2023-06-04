@@ -10,6 +10,12 @@ public class Account {
     private String Password;
     private Double Balance;
     private LocalDate BirthDate;
+
+    public Account(String userName, String password) {
+        UserName = userName;
+        Password = password;
+    }
+
     private String Address;
     private String ZipCode;
     public LocalDate getBirthDate() {
@@ -23,9 +29,9 @@ public class Account {
     ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
     ArrayList<Bill> Bills=new ArrayList<Bill>();
 
-    public void withdraw(Double amount){
+    public void withdraw(Double amount)throws InsufficientBalance{
         if(amount>Balance){
-            //Error
+            throw new InsufficientBalance();
         }else {
             Withdraw w =new Withdraw(amount,LocalDate.now(),this.getBalance());
             Transactions.add(w);
@@ -38,31 +44,26 @@ public class Account {
         this.Balance+=amount;
     }
 
-    public void transfer(Double amount,String receiverAccountNo){
+    public void transfer(Double amount,Integer receiverAccountNo)throws TransferExceptions{
 
         if(amount>Balance){
-            //Error
-        }else {
+            throw new InsufficientBalance();
+        }else if(Bank.check(receiverAccountNo)==null){
+            throw new InvalidAccountNo();
+        }
+        else {
             Transfer t =new Transfer(amount,LocalDate.now(),receiverAccountNo,this.getBalance());
             Transactions.add(t);
             this.Balance -= amount;
         }
     }
-    public void payBill(Double amount, String description,BillType bt){
+    public void payBill(Double amount, String description,BillType bt)throws InsufficientBalance{
         if(amount>Balance){
-            //Error
+            throw new InsufficientBalance();
         }else {
             Bill b=new Bill(amount,description,bt,LocalDate.now(),this.getBalance());
             Bills.add(b);
             this.Balance -= amount;
-        }
-    }
-    public void purchaseItem(Double amount,String storeName,String itemName){
-        if(amount>Balance){
-            //Error
-        }else {
-            Item i = new Item(amount, storeName, itemName);
-            payBill(amount,"",BillType.PURCHASED_ITEMS);
         }
     }
 
@@ -71,8 +72,24 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(getAccountNo(), account.getAccountNo());
+        return Objects.equals(getUserName(), account.getUserName()) && Objects.equals(getPassword(), account.getPassword());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserName(), getPassword());
+    }
+
+    public void purchaseItem(Double amount, String storeName, String itemName)throws InsufficientBalance{
+        if(amount>Balance){
+            throw new InsufficientBalance();
+        }else {
+            Item i = new Item(amount, storeName, itemName);
+            payBill(amount,"",BillType.PURCHASED_ITEMS);
+        }
+    }
+
+
 
     public void printBankStatement(){
     }

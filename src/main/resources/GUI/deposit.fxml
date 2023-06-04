@@ -20,8 +20,8 @@
             <Font name="Bell MT" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="273.0" layoutY="108.0" />
-      <Button layoutX="368.0" layoutY="252.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="142.0" text="Confirm">
+      <TextField fx:id="depositamount" layoutX="273.0" layoutY="108.0" />
+      <Button fx:id="depositconfirm" layoutX="368.0" layoutY="252.0" mnemonicParsing="false" onAction="#dodeposit" prefHeight="82.0" prefWidth="142.0" text="Confirm">
          <font>
             <Font size="24.0" />
          </font>

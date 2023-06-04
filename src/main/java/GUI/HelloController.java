@@ -1,5 +1,5 @@
 package GUI;
-
+import System.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,12 +44,47 @@ public class HelloController {
     @FXML
     private Label loginmessage;
     @FXML
-    private TextField passwd;
+    private javafx.scene.control.TextField passwdtf;
     @FXML
-    private TextField email;
+    private javafx.scene.control.TextField emailtf;
     @FXML
     private Button transactionmenu;
-
+    @FXML
+    private Button signup;
+    @FXML
+    private Button depositconfirm;
+    @FXML
+    private javafx.scene.control.TextField depositamount;
+    @FXML
+    private Button withdrawconfirm;
+    @FXML
+    private javafx.scene.control.TextField withdrawamount;
+    @FXML
+    private Label withdrawmesssage;
+    @FXML
+    private Button transferconfirm;
+    @FXML
+    private javafx.scene.control.TextField transferamount,transferreceiver;
+    @FXML
+    private Label transfermesssage;
+    @FXML
+    void login(ActionEvent event) throws Exception{
+        String tempEmail= emailtf.getText();
+        String tempPasswd= passwdtf.getText();
+        Account current=Bank.check(tempEmail,tempPasswd);
+        if(current==null){
+            loginmessage.setText("Wrong Password or User does not exist");
+        }else{
+            emailtf.clear();
+            passwdtf.clear();
+            Stage stage = (Stage) login.getScene().getWindow();
+            GlobalUser.setUserID(current.getUserName());
+            GlobalUser.setUserPASS(current.getPassword());
+            Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
     @FXML
     void goshowbalance(ActionEvent event) throws Exception {
         Stage stage = (Stage) showbalance.getScene().getWindow();
@@ -59,7 +94,7 @@ public class HelloController {
         stage.show();
     }
 
-    @FXML
+    /*@FXML
     void gohome(ActionEvent event) throws Exception {
         String tmpU = email.getText();
         String tmpP = passwd.getText();
@@ -75,7 +110,7 @@ public class HelloController {
         stage.setScene(new Scene(root));
         stage.show();
         loginmessage.setText("Wrong Password or User does not exist");
-    }
+    }*/
 
     @FXML
     void gotransaction(ActionEvent event) throws Exception {
@@ -124,7 +159,7 @@ public class HelloController {
     void gologout(ActionEvent event) throws Exception {
         Stage stage = (Stage) logout.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-
+        GlobalUser.setUserID("");
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -165,15 +200,26 @@ public class HelloController {
     void godeposit(ActionEvent event) throws Exception {
         Stage stage = (Stage) deposit.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("deposit.fxml"));
-
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    @FXML
+    void dodeposit(ActionEvent event) throws Exception {
+        System.out.println(Double.valueOf(depositamount.getText()));
+        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).deposit(Double.valueOf(depositamount.getText()));
+    }
+    @FXML
+    void dowithdraw(ActionEvent event) throws Exception {
+        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
+    }
+    @FXML
+    void dotransfer(ActionEvent event) throws Exception {
+        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).transfer(Double.valueOf(withdrawamount.getText()),Integer.valueOf(transferreceiver.getText()));
     }
     @FXML
     void gotransactionhome(ActionEvent event) throws Exception {
         Stage stage = (Stage) transactionmenu.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
-
         stage.setScene(new Scene(root));
         stage.show();
     }
