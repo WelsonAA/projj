@@ -223,7 +223,13 @@ public class HelloController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
+    @FXML
+    void gosignup(ActionEvent event) throws Exception {
+        Stage stage = (Stage) signup.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("createAccount.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 
 
