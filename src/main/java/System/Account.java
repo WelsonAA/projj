@@ -16,6 +16,14 @@ public class Account {
         Password = password;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "UserName='" + UserName + '\'' +
+                ", Password='" + Password + '\'' +
+                '}';
+    }
+
     private String Address;
     private String ZipCode;
     public LocalDate getBirthDate() {
@@ -57,11 +65,11 @@ public class Account {
             this.Balance -= amount;
         }
     }
-    public void payBill(Double amount, String description,BillType bt)throws InsufficientBalance{
+    public void payBill(Double amount, BillType bt)throws InsufficientBalance{
         if(amount>Balance){
             throw new InsufficientBalance();
         }else {
-            Bill b=new Bill(amount,description,bt,LocalDate.now(),this.getBalance());
+            Bill b=new Bill(amount,bt,LocalDate.now(),this.getBalance());
             Bills.add(b);
             this.Balance -= amount;
         }
@@ -85,7 +93,7 @@ public class Account {
             throw new InsufficientBalance();
         }else {
             Item i = new Item(amount, storeName, itemName);
-            payBill(amount,"",BillType.PURCHASED_ITEMS);
+            payBill(amount,BillType.PURCHASED_ITEMS);
         }
     }
 

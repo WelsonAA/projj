@@ -1,18 +1,22 @@
 package GUI;
 import System.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-
-public class HelloController {
+public class HelloController implements Initializable {
     @FXML
     private Label welcomeText;
     @FXML
@@ -64,9 +68,29 @@ public class HelloController {
     @FXML
     private Button transferconfirm;
     @FXML
-    private javafx.scene.control.TextField transferamount,transferreceiver;
+    private javafx.scene.control.TextField transferamount;
+    @FXML
+    private javafx.scene.control.TextField  transferreceiver;
     @FXML
     private Label transfermesssage;
+    @FXML
+    private Button billconfirm;
+    @FXML
+    private javafx.scene.control.TextField billamount;
+    @FXML
+    private ComboBox<BillType> billCombo=new ComboBox<>();
+    @FXML
+    private Button itemconfirm;
+    @FXML
+    private javafx.scene.control.TextField itemamount;
+    @FXML
+    private javafx.scene.control.TextField itemstore;
+    @FXML
+    private javafx.scene.control.TextField itemname;
+    @FXML
+    private Label itemmessage;
+    @FXML
+    private javafx.scene.control.TextField balancetf;
     @FXML
     void login(ActionEvent event) throws Exception{
         String tempEmail= emailtf.getText();
@@ -89,9 +113,13 @@ public class HelloController {
     void goshowbalance(ActionEvent event) throws Exception {
         Stage stage = (Stage) showbalance.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("showBalance.fxml"));
-
         stage.setScene(new Scene(root));
         stage.show();
+        System.out.println(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).getBalance().toString());
+
+        balancetf.setText(Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).getBalance().toString());
+
+
     }
 
     /*@FXML
@@ -127,6 +155,27 @@ public class HelloController {
 
         stage.setScene(new Scene(root));
         stage.show();
+    }
+        @FXML
+    void dobills(ActionEvent event) throws Exception {
+        if(billCombo.getValue().equals(BillType.PURCHASED_ITEMS)){
+            //TODO: set values of purchase items screen
+            itemamount.setText(billamount.getText());
+            gopurchaseitems(event);
+        }
+        try {
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).payBill(Double.valueOf(billamount.getText()),billCombo.getValue());
+        }catch(InsufficientBalance ib){
+            withdrawmesssage.setText("Insufficient Balance");
+        }
+    }
+    @FXML
+    void dopurcchaseitems(ActionEvent event){
+        try {
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).purchaseItem(Double.valueOf(itemamount.getText()), itemstore.getText(), itemname.getText());
+        }catch(InsufficientBalance ib){
+            itemmessage.setText("Insufficient Balance");
+        }
     }
     @FXML
     void gopurchaseitems(ActionEvent event) throws Exception {
@@ -165,9 +214,20 @@ public class HelloController {
     }
     @FXML
     void gohomefrombalance(ActionEvent event) throws Exception {
+        itemmessage.setText("");
+        itemamount.clear();
+        itemstore.clear();
+        itemname.clear();
+        transfermesssage.setText("");
+        transferamount.clear();
+        withdrawamount.clear();
+        withdrawmesssage.setText("");
+        transferreceiver.clear();
+        billamount.clear();
+        billamount.clear();
+        balancetf.clear();
         Stage stage = (Stage) homebalance.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -191,7 +251,6 @@ public class HelloController {
     void gohomefromtransaction(ActionEvent event) throws Exception {
         Stage stage = (Stage) hometransaction.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -204,17 +263,29 @@ public class HelloController {
         stage.show();
     }
     @FXML
-    void dodeposit(ActionEvent event) throws Exception {
+    void dodeposit(ActionEvent event){
         System.out.println(Double.valueOf(depositamount.getText()));
         Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).deposit(Double.valueOf(depositamount.getText()));
     }
     @FXML
-    void dowithdraw(ActionEvent event) throws Exception {
-        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
+    void dowithdraw(ActionEvent event){
+        try {
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
+        }catch(InsufficientBalance ib){
+            withdrawmesssage.setText("Insufficient Balance");
+        }
     }
     @FXML
-    void dotransfer(ActionEvent event) throws Exception {
-        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).transfer(Double.valueOf(withdrawamount.getText()),Integer.valueOf(transferreceiver.getText()));
+    void dotransfer(ActionEvent event){
+        try{
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).transfer(Double.valueOf(withdrawamount.getText()), Integer.valueOf(transferreceiver.getText()));
+        }catch(InsufficientBalance ib){
+            transfermesssage.setText("Insufficient Balance");
+        }catch(InvalidAccountNo ivn){
+            transfermesssage.setText("InvalidAccountNo");
+        } catch(TransferExceptions e){
+
+        }
     }
     @FXML
     void gotransactionhome(ActionEvent event) throws Exception {
@@ -232,5 +303,8 @@ public class HelloController {
     }
 
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        billCombo.setItems(FXCollections.observableArrayList(BillType.values()));
+    }
 }

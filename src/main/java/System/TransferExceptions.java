@@ -1,4 +1,4 @@
 package System;
 
-public class TransferExceptions extends Exception{
+public abstract class TransferExceptions extends Exception{
 }
