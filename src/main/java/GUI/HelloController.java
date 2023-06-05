@@ -92,6 +92,8 @@ public class HelloController implements Initializable {
     @FXML
     private javafx.scene.control.TextField balancetf;
     @FXML
+    private Button showbalancebutton;
+    @FXML
     void login(ActionEvent event) throws Exception{
         String tempEmail= emailtf.getText();
         String tempPasswd= passwdtf.getText();
@@ -117,9 +119,12 @@ public class HelloController implements Initializable {
         stage.show();
         System.out.println(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).getBalance().toString());
 
+
+    }
+    @FXML
+    void doshowbalance(ActionEvent event){
+        //balancetf.setText("hiii");
         balancetf.setText(Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).getBalance().toString());
-
-
     }
 
     /*@FXML
@@ -156,17 +161,25 @@ public class HelloController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    @FXML
+    void gopurchaseitems2(ActionEvent event)throws Exception{
+        Stage stage = (Stage) billconfirm.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("purchaseitem.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
         @FXML
     void dobills(ActionEvent event) throws Exception {
         if(billCombo.getValue().equals(BillType.PURCHASED_ITEMS)){
             //TODO: set values of purchase items screen
-            itemamount.setText(billamount.getText());
-            gopurchaseitems(event);
-        }
-        try {
-            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).payBill(Double.valueOf(billamount.getText()),billCombo.getValue());
-        }catch(InsufficientBalance ib){
-            withdrawmesssage.setText("Insufficient Balance");
+            //String x=billamount.getText();
+            gopurchaseitems2(event);
+        }else {
+            try {
+                Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).payBill(Double.valueOf(billamount.getText()), billCombo.getValue());
+            } catch (InsufficientBalance ib) {
+                withdrawmesssage.setText("Insufficient Balance");
+            }
         }
     }
     @FXML
@@ -214,7 +227,7 @@ public class HelloController implements Initializable {
     }
     @FXML
     void gohomefrombalance(ActionEvent event) throws Exception {
-        itemmessage.setText("");
+        /*itemmessage.setText("");
         itemamount.clear();
         itemstore.clear();
         itemname.clear();
@@ -225,7 +238,7 @@ public class HelloController implements Initializable {
         transferreceiver.clear();
         billamount.clear();
         billamount.clear();
-        balancetf.clear();
+        balancetf.clear();*/
         Stage stage = (Stage) homebalance.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         stage.setScene(new Scene(root));

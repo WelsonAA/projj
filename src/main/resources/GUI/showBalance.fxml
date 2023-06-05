@@ -26,5 +26,10 @@
          </font>
       </Button>
       <TextField fx:id="balancetf" editable="false" layoutX="257.0" layoutY="85.0" />
+      <Button fx:id="showbalancebutton" layoutX="108.0" layoutY="190.0" mnemonicParsing="false" onAction="#doshowbalance" prefHeight="84.0" prefWidth="122.0" text="Show">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
