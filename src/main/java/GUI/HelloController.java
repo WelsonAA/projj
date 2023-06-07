@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Arrays;
@@ -123,7 +121,7 @@ public class HelloController implements Initializable {
     }
     @FXML
     void doshowbalance(ActionEvent event){
-        //balancetf.setText("hiii");
+        balancetf.setText("");
         balancetf.setText(Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).getBalance().toString());
     }
 
@@ -170,6 +168,7 @@ public class HelloController implements Initializable {
     }
         @FXML
     void dobills(ActionEvent event) throws Exception {
+        withdrawmesssage.setText("");
         if(billCombo.getValue().equals(BillType.PURCHASED_ITEMS)){
             //TODO: set values of purchase items screen
             //String x=billamount.getText();
@@ -184,6 +183,7 @@ public class HelloController implements Initializable {
     }
     @FXML
     void dopurcchaseitems(ActionEvent event){
+        itemmessage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).purchaseItem(Double.valueOf(itemamount.getText()), itemstore.getText(), itemname.getText());
         }catch(InsufficientBalance ib){
@@ -225,25 +225,7 @@ public class HelloController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    @FXML
-    void gohomefrombalance(ActionEvent event) throws Exception {
-        /*itemmessage.setText("");
-        itemamount.clear();
-        itemstore.clear();
-        itemname.clear();
-        transfermesssage.setText("");
-        transferamount.clear();
-        withdrawamount.clear();
-        withdrawmesssage.setText("");
-        transferreceiver.clear();
-        billamount.clear();
-        billamount.clear();
-        balancetf.clear();*/
-        Stage stage = (Stage) homebalance.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+
     @FXML
     void gowithdraw(ActionEvent event) throws Exception {
         Stage stage = (Stage) withdraw.getScene().getWindow();
@@ -282,6 +264,8 @@ public class HelloController implements Initializable {
     }
     @FXML
     void dowithdraw(ActionEvent event){
+
+        withdrawmesssage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
         }catch(InsufficientBalance ib){
@@ -290,6 +274,7 @@ public class HelloController implements Initializable {
     }
     @FXML
     void dotransfer(ActionEvent event){
+        transfermesssage.setText("");
         try{
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).transfer(Double.valueOf(withdrawamount.getText()), Integer.valueOf(transferreceiver.getText()));
         }catch(InsufficientBalance ib){
@@ -301,11 +286,25 @@ public class HelloController implements Initializable {
         }
     }
     @FXML
+    void gohomefrombalance(ActionEvent event) throws Exception {
+        Stage stage = (Stage) homebalance.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
     void gotransactionhome(ActionEvent event) throws Exception {
         Stage stage = (Stage) transactionmenu.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        billCombo.setItems(FXCollections.observableArrayList(BillType.values()));
     }
     @FXML
     void gosignup(ActionEvent event) throws Exception {
@@ -314,10 +313,33 @@ public class HelloController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        billCombo.setItems(FXCollections.observableArrayList(BillType.values()));
+    @FXML public TextField fName;
+    @FXML public TextField mName;
+    @FXML public TextField lName;
+    @FXML public TextField address;
+    @FXML public TextField city;
+    @FXML public TextField zipcode;
+    @FXML public TextField SSN;
+    @FXML public TextField cardNo;
+    @FXML public TextField telephoneNo;
+    @FXML public TextField eMail;
+    @FXML public PasswordField passWord;
+    @FXML public PasswordField rePassWord;
+    @FXML public Label createmessage;
+    @FXML
+    public DatePicker birthDate;
+    @FXML
+    public Button confirmCreate;
+    @FXML
+    void doCreateAccount(ActionEvent event){
+        createmessage.setText("");
+        try{
+            if(passWord.getText().equals(rePassWord.getText())==false){
+                throw new NotMatchingPassword();
+            }
+            Bank.addAccount(new Account(eMail.getText(),passWord.getText(),0.0,birthDate.getValue()));
+        }catch(NotMatchingPassword e){
+            createmessage.setText("Unmatching passwords");
+        }
     }
 }

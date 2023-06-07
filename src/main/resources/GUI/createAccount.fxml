@@ -17,7 +17,7 @@
             <Image url="@../background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="logout" layoutX="499.0" layoutY="607.0" mnemonicParsing="false" onAction="#gologout" prefHeight="110.0" prefWidth="223.0" text="Submit">
+      <Button fx:id="confirmCreate" layoutX="499.0" layoutY="607.0" mnemonicParsing="false" onAction="#doCreateAccount" prefHeight="110.0" prefWidth="223.0" text="Submit">
          <font>
             <Font size="30.0" />
          </font>
@@ -26,17 +26,17 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="58.0" />
+      <TextField fx:id="fName" layoutX="164.0" layoutY="58.0" />
       <Label layoutX="52.0" layoutY="101.0" prefHeight="29.0" prefWidth="112.0" text="Middle Name" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="103.0" />
+      <TextField fx:id="mName" layoutX="164.0" layoutY="103.0" />
       <Label layoutX="52.0" layoutY="151.0" prefHeight="29.0" prefWidth="112.0" text="Last Name" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="153.0" />
+      <TextField fx:id="lName" layoutX="164.0" layoutY="153.0" />
       <Label layoutX="52.0" layoutY="196.0" prefHeight="29.0" prefWidth="112.0" text="Birthday" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -46,22 +46,22 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="251.0" />
+      <TextField fx:id="address" layoutX="164.0" layoutY="251.0" />
       <Label layoutX="52.0" layoutY="294.0" prefHeight="29.0" prefWidth="112.0" text="City" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="296.0" />
+      <TextField fx:id="city" layoutX="164.0" layoutY="296.0" />
       <Label layoutX="52.0" layoutY="344.0" prefHeight="29.0" prefWidth="112.0" text="Zip Code" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="346.0" />
+      <TextField fx:id="zipcode" layoutX="164.0" layoutY="346.0" />
       <Label layoutX="52.0" layoutY="389.0" prefHeight="29.0" prefWidth="112.0" text="SSN" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="391.0" />
+      <TextField fx:id="SSN" layoutX="164.0" layoutY="391.0" />
       <Label layoutX="52.0" layoutY="440.0" prefHeight="29.0" prefWidth="112.0" text="Card No." textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -70,12 +70,12 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="487.0" />
+      <TextField fx:id="telephoneNo" layoutX="164.0" layoutY="487.0" />
       <Label layoutX="52.0" layoutY="535.0" prefHeight="29.0" prefWidth="112.0" text="Email" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="537.0" />
+      <TextField fx:id="eMail" layoutX="164.0" layoutY="537.0" />
       <Label layoutX="52.0" layoutY="580.0" prefHeight="29.0" prefWidth="112.0" text="Password" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -84,9 +84,14 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <DatePicker layoutX="325.0" layoutY="198.0" />
-      <PasswordField layoutX="164.0" layoutY="442.0" />
-      <PasswordField layoutX="164.0" layoutY="582.0" />
-      <PasswordField layoutX="164.0" layoutY="635.0" />
+      <DatePicker fx:id="birthDate" layoutX="325.0" layoutY="198.0" />
+      <PasswordField fx:id="cardNo" layoutX="164.0" layoutY="442.0" />
+      <PasswordField fx:id="passWord" layoutX="164.0" layoutY="582.0" />
+      <PasswordField fx:id="rePassWord" layoutX="164.0" layoutY="635.0" />
+      <Label fx:id="createmessage" alignment="CENTER" layoutX="361.0" layoutY="62.0" prefHeight="82.0" prefWidth="384.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
