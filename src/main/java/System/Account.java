@@ -6,11 +6,12 @@ import java.util.Objects;
 
 public class Account {
     private Integer AccountNo;
+    public String firstName, middleName,lastName;
     private String UserName;
     private String Password;
     private Double Balance;
     private LocalDate BirthDate;
-
+    public String notification;
     public Account(String userName, String password) {
         UserName = userName;
         Password = password;
@@ -33,29 +34,40 @@ public class Account {
     private String SSN;
     private String CardNo;
     private String TelephoneNo;
-    private String Email;
     ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
     ArrayList<Bill> Bills=new ArrayList<Bill>();
 
-    public void withdraw(Double amount)throws InsufficientBalance{
+    public void withdraw(Double amount)throws TransactionsExceptions{
         if(amount>Balance){
             throw new InsufficientBalance();
-        }else {
+        }else if(amount<=0){
+            throw new InvalidAmount();
+        }
+        else {
             Withdraw w =new Withdraw(amount,LocalDate.now(),this.getBalance());
             Transactions.add(w);
             this.Balance -= amount;
+            this.notification+="Successful Withdraw -"+amount+"\n";
         }
     }
-    public void deposit(Double amount){
-        Deposit d =new Deposit(amount,LocalDate.now(),this.getBalance());
-        Transactions.add(d);
-        this.Balance+=amount;
+    public void deposit(Double amount)throws TransactionsExceptions{
+        if(amount<=0){
+            throw new InvalidAmount();
+        }else {
+            Deposit d = new Deposit(amount, LocalDate.now(), this.getBalance());
+            Transactions.add(d);
+            this.Balance += amount;
+
+            this.notification+="Successful Deposit +"+amount+"\n";
+        }
     }
 
-    public void transfer(Double amount,Integer receiverAccountNo)throws TransferExceptions{
+    public void transfer(Double amount,Integer receiverAccountNo)throws TransactionsExceptions {
 
         if(amount>Balance){
             throw new InsufficientBalance();
+        }else if(amount<=0){
+            throw new InvalidAmount();
         }else if(Bank.check(receiverAccountNo)==null){
             throw new InvalidAccountNo();
         }
@@ -63,15 +75,21 @@ public class Account {
             Transfer t =new Transfer(amount,LocalDate.now(),receiverAccountNo,this.getBalance());
             Transactions.add(t);
             this.Balance -= amount;
+
+            this.notification+="Successful Transfer -"+amount+"\n";
         }
     }
-    public void payBill(Double amount, BillType bt)throws InsufficientBalance{
+    public void payBill(Double amount, BillType bt)throws TransactionsExceptions{
         if(amount>Balance){
             throw new InsufficientBalance();
+        }else if(amount<=0){
+            throw new InvalidAmount();
         }else {
             Bill b=new Bill(amount,bt,LocalDate.now(),this.getBalance());
             Bills.add(b);
             this.Balance -= amount;
+
+            this.notification+="Successful Bill Payment -"+amount+"\n";
         }
     }
 
@@ -88,13 +106,11 @@ public class Account {
         return Objects.hash(getUserName(), getPassword());
     }
 
-    public void purchaseItem(Double amount, String storeName, String itemName)throws InsufficientBalance{
-        if(amount>Balance){
-            throw new InsufficientBalance();
-        }else {
-            Item i = new Item(amount, storeName, itemName);
-            payBill(amount,BillType.PURCHASED_ITEMS);
-        }
+    public void purchaseItem(Double amount, String storeName, String itemName)throws TransactionsExceptions{
+
+         Item i = new Item(amount, storeName, itemName);
+         payBill(amount,BillType.PURCHASED_ITEMS);
+
     }
 
 
@@ -106,11 +122,26 @@ public class Account {
         Password = password;
         BirthDate = birthDate;
         AccountNo=id++;
-        if(balance<=0.0){
-            Balance=0.0;
-        }else{
-            this.Balance = balance;
-        }
+        this.Balance=balance;
+        this.notification="";
+    }
+
+    public Account(String userName, String password, LocalDate birthDate, String address,
+                   String zipCode, String SSN, String cardNo, String telephoneNo,String firstName,String middleName,String lastName) {
+        AccountNo=id++;
+        UserName = userName;
+        Password = password;
+        Balance = 0.0;
+        BirthDate = birthDate;
+        Address = address;
+        ZipCode = zipCode;
+        this.SSN = SSN;
+        CardNo = cardNo;
+        TelephoneNo = telephoneNo;
+        this.firstName=firstName;
+        this.middleName=middleName;
+        this.lastName=lastName;
+        this.notification="";
     }
 
     public Integer getAccountNo() {
@@ -148,7 +179,4 @@ public class Account {
         return TelephoneNo;
     }
 
-    public String getEmail() {
-        return Email;
-    }
 }

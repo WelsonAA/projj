@@ -1,4 +1,8 @@
 package System;
 
-public class InsufficientBalance extends TransferExceptions {
+public class InsufficientBalance extends TransactionsExceptions {
+    @Override
+    public String toString() {
+        return "InsufficientBalance";
+    }
 }

@@ -17,6 +17,8 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         Bank.addAccount(new Account("user1","1234", 2500.0,LocalDate.parse("2003-03-24")));
+
+        Bank.addAccount(new Account("user2","1234", 2500.0,LocalDate.parse("2003-03-24")));
         launch();
     }
 }

@@ -1,7 +1,6 @@
 package GUI;
 import System.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -91,6 +89,9 @@ public class HelloController implements Initializable {
     private javafx.scene.control.TextField balancetf;
     @FXML
     private Button showbalancebutton;
+    @FXML private Label notificationMessage;
+    @FXML private Label depositmessage;
+
     @FXML
     void login(ActionEvent event) throws Exception{
         String tempEmail= emailtf.getText();
@@ -166,9 +167,10 @@ public class HelloController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
-        @FXML
+    @FXML private Label billsmessage;
+    @FXML
     void dobills(ActionEvent event) throws Exception {
-        withdrawmesssage.setText("");
+        billsmessage.setText("");
         if(billCombo.getValue().equals(BillType.PURCHASED_ITEMS)){
             //TODO: set values of purchase items screen
             //String x=billamount.getText();
@@ -176,8 +178,9 @@ public class HelloController implements Initializable {
         }else {
             try {
                 Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).payBill(Double.valueOf(billamount.getText()), billCombo.getValue());
-            } catch (InsufficientBalance ib) {
-                withdrawmesssage.setText("Insufficient Balance");
+                billsmessage.setText("Bill Payment Successful");
+            } catch (TransactionsExceptions ib) {
+                billsmessage.setText(ib.toString());
             }
         }
     }
@@ -186,8 +189,9 @@ public class HelloController implements Initializable {
         itemmessage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).purchaseItem(Double.valueOf(itemamount.getText()), itemstore.getText(), itemname.getText());
-        }catch(InsufficientBalance ib){
-            itemmessage.setText("Insufficient Balance");
+            itemmessage.setText("Item Purchase Successful");
+        }catch(TransactionsExceptions ib){
+            itemmessage.setText(ib.toString());
         }
     }
     @FXML
@@ -259,30 +263,32 @@ public class HelloController implements Initializable {
     }
     @FXML
     void dodeposit(ActionEvent event){
-        System.out.println(Double.valueOf(depositamount.getText()));
-        Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).deposit(Double.valueOf(depositamount.getText()));
+        depositmessage.setText("");
+        try {
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).deposit(Double.valueOf(depositamount.getText()));
+            depositmessage.setText("Deposit Successful");
+        }catch( TransactionsExceptions e){
+            depositmessage.setText(e.toString());
+        }
     }
     @FXML
     void dowithdraw(ActionEvent event){
-
         withdrawmesssage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
-        }catch(InsufficientBalance ib){
-            withdrawmesssage.setText("Insufficient Balance");
+            withdrawmesssage.setText("Withdraw Successful");
+        }catch(TransactionsExceptions ib){
+            withdrawmesssage.setText(ib.toString());
         }
     }
     @FXML
     void dotransfer(ActionEvent event){
         transfermesssage.setText("");
         try{
-            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).transfer(Double.valueOf(withdrawamount.getText()), Integer.valueOf(transferreceiver.getText()));
-        }catch(InsufficientBalance ib){
-            transfermesssage.setText("Insufficient Balance");
-        }catch(InvalidAccountNo ivn){
-            transfermesssage.setText("InvalidAccountNo");
-        } catch(TransferExceptions e){
-
+            Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).transfer(Double.valueOf(transferamount.getText()), Integer.valueOf(transferreceiver.getText()));
+            transfermesssage.setText("Transfer Successful");
+        }catch(TransactionsExceptions ib){
+            transfermesssage.setText(ib.toString());
         }
     }
     @FXML
@@ -320,16 +326,14 @@ public class HelloController implements Initializable {
     @FXML public TextField city;
     @FXML public TextField zipcode;
     @FXML public TextField SSN;
-    @FXML public TextField cardNo;
+    @FXML public PasswordField cardNo;
     @FXML public TextField telephoneNo;
     @FXML public TextField eMail;
     @FXML public PasswordField passWord;
     @FXML public PasswordField rePassWord;
     @FXML public Label createmessage;
-    @FXML
-    public DatePicker birthDate;
-    @FXML
-    public Button confirmCreate;
+    @FXML public DatePicker birthDate;
+    @FXML public Button confirmCreate;
     @FXML
     void doCreateAccount(ActionEvent event){
         createmessage.setText("");
@@ -337,9 +341,17 @@ public class HelloController implements Initializable {
             if(passWord.getText().equals(rePassWord.getText())==false){
                 throw new NotMatchingPassword();
             }
-            Bank.addAccount(new Account(eMail.getText(),passWord.getText(),0.0,birthDate.getValue()));
+            Bank.addAccount(new Account(eMail.getText(),passWord.getText(),birthDate.getValue(),
+                    address.getText(),zipcode.getText(),SSN.getText(),cardNo.getText(),telephoneNo.getText(),
+                    fName.getText(),mName.getText(),fName.getText()));
+            createmessage.setText("Created Successfully");
         }catch(NotMatchingPassword e){
             createmessage.setText("Unmatching passwords");
         }
+    }
+    @FXML private Button shownot;
+    @FXML
+    void donot (ActionEvent event){
+        notificationMessage.setText(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).notification);
     }
 }

@@ -22,7 +22,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="419.0" layoutY="148.0" />
+      <TextField fx:id="billamount" layoutX="419.0" layoutY="148.0" />
       <Label layoutX="279.0" layoutY="148.0" prefHeight="25.0" prefWidth="99.0" text="Amount" textFill="WHITE">
          <font>
             <Font size="16.0" />
@@ -38,5 +38,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label fx:id="billsmessage" alignment="CENTER" layoutX="159.0" layoutY="37.0" prefHeight="41.0" prefWidth="304.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

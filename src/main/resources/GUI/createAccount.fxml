@@ -41,7 +41,6 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="164.0" layoutY="198.0" />
       <Label layoutX="52.0" layoutY="249.0" prefHeight="29.0" prefWidth="112.0" text="Address" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -71,7 +70,7 @@
             <Font size="14.0" />
          </font></Label>
       <TextField fx:id="telephoneNo" layoutX="164.0" layoutY="487.0" />
-      <Label layoutX="52.0" layoutY="535.0" prefHeight="29.0" prefWidth="112.0" text="Email" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="535.0" prefHeight="29.0" prefWidth="112.0" text="Username" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -84,7 +83,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <DatePicker fx:id="birthDate" layoutX="325.0" layoutY="198.0" />
+      <DatePicker fx:id="birthDate" layoutX="164.0" layoutY="198.0" />
       <PasswordField fx:id="cardNo" layoutX="164.0" layoutY="442.0" />
       <PasswordField fx:id="passWord" layoutX="164.0" layoutY="582.0" />
       <PasswordField fx:id="rePassWord" layoutX="164.0" layoutY="635.0" />
@@ -93,5 +92,10 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="logout" layoutX="499.0" layoutY="459.0" mnemonicParsing="false" onAction="#gologout" prefHeight="110.0" prefWidth="223.0" text="Back">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -3,12 +3,14 @@ package System;
 import java.time.LocalDate;
 
 public class Transaction {
+
     protected Double TransactionAmount;
     protected Integer TransactionID;
     protected LocalDate TransactionDate;
     static Integer id=0;
     protected Double BalanceBefore;
     protected Double BalanceAfter;
+
     public Transaction(){}
 
     public LocalDate getTransactionDate() {

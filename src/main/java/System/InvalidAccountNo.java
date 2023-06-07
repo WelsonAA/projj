@@ -1,4 +1,8 @@
 package System;
 
-public class InvalidAccountNo extends TransferExceptions{
+public class InvalidAccountNo extends TransactionsExceptions {
+    @Override
+    public String toString() {
+        return "InvalidAccountNo";
+    }
 }
