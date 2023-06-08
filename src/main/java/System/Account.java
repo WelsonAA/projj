@@ -34,7 +34,32 @@ public class Account {
     private String SSN;
     private String CardNo;
     private String TelephoneNo;
-    ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getNotification() {
+        return notification;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return Transactions;
+    }
+
+    public ArrayList<Bill> getBills() {
+        return Bills;
+    }
+
+    public ArrayList<Transaction> Transactions=new ArrayList<Transaction>();
     ArrayList<Bill> Bills=new ArrayList<Bill>();
 
     public void withdraw(Double amount)throws TransactionsExceptions{

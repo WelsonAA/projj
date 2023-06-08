@@ -354,4 +354,30 @@ public class HelloController implements Initializable {
     void donot (ActionEvent event){
         notificationMessage.setText(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).notification);
     }
+    @FXML private Label statementfname;
+    @FXML private Label statementlname;
+    @FXML private Label statementaddress;
+    @FXML private Label statementSSN;
+    @FXML private Label statementuser;
+    @FXML private Button showstatement;
+    @FXML private Label statementdisplay;
+    @FXML private DatePicker statementdate;
+    @FXML void dostatement(ActionEvent event){
+        Account acc=Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS());
+        statementdisplay.setText("");
+        statementfname.setText("");
+        statementlname.setText("");
+        statementaddress.setText("");
+        statementSSN.setText("");
+        statementuser.setText("");
+
+
+        statementfname.setText(acc.getFirstName());
+        statementlname.setText(acc.getLastName());
+        statementaddress.setText(acc.getAddress());
+        statementSSN.setText(acc.getSSN());
+        statementuser.setText(acc.getUserName());
+
+        statementdisplay.setText(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).Transactions.toString());
+    }
 }

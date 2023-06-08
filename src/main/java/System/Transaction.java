@@ -3,6 +3,16 @@ package System;
 import java.time.LocalDate;
 
 public class Transaction {
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "TransactionAmount=" + TransactionAmount +
+                ", TransactionID=" + TransactionID +
+                ", TransactionDate=" + TransactionDate +
+                ", BalanceBefore=" + BalanceBefore +
+                ", BalanceAfter=" + BalanceAfter +
+                '}'+"\n";
+    }
 
     protected Double TransactionAmount;
     protected Integer TransactionID;
