@@ -123,46 +123,71 @@ public class HelloController implements Initializable {
     }
     @FXML
     void goshowbalance(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) showbalance.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("showBalance.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
         System.out.println(Bank.check(GlobalUser.getUserID(),GlobalUser.getUserPASS()).getBalance().toString());
-
+        long end=System.currentTimeMillis();
+        long elapsed=start-end;
+        System.out.println("elapsedtime "+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
 
     }
     @FXML
     void doshowbalance(ActionEvent event){
+        long start=System.currentTimeMillis();
         balancetf.setText("");
         balancetf.setText(Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).getBalance().toString());
+        long end=System.currentTimeMillis();
+        long elapsed=start-end;
+        System.out.println("elapsedtime "+abs(elapsed));
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
     @FXML
     void gotransaction(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) transaction.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime "+abs(elapsed));
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gobills(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) bills.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("bills.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime "+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gopurchaseitems2(ActionEvent event)throws Exception{
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) billconfirm.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("purchaseitem.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime "+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML private Label billsmessage;
     @FXML
     void dobills(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         billsmessage.setText("");
         if(billCombo.getValue().equals(BillType.PURCHASED_ITEMS)){
             //TODO: set values of purchase items screen
@@ -176,9 +201,14 @@ public class HelloController implements Initializable {
                 billsmessage.setText(ib.toString());
             }
         }
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void dopurcchaseitems(ActionEvent event){
+        long start=System.currentTimeMillis();
         itemmessage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).purchaseItem(Double.valueOf(itemamount.getText()), itemstore.getText(), itemname.getText());
@@ -186,58 +216,92 @@ public class HelloController implements Initializable {
         }catch(TransactionsExceptions ib){
             itemmessage.setText(ib.toString());
         }
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gopurchaseitems(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) purchaseitem.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("purchaseitem.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
     @FXML
     void gonotifications(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) notifications.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("notifications.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
     @FXML
     void gobankstatement(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) bankstatement.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("BankStatement.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
     @FXML
     void gologout(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) logout.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         GlobalUser.setUserID("");
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
     @FXML
     void gowithdraw(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) withdraw.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("withdraw.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gotransfer(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) transfer.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("TransferScene.fxml"));
 
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gohomefromtransaction(ActionEvent event) throws Exception {
@@ -249,13 +313,19 @@ public class HelloController implements Initializable {
 
     @FXML
     void godeposit(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) deposit.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("deposit.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void dodeposit(ActionEvent event){
+        long start=System.currentTimeMillis();
         depositmessage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).deposit(Double.valueOf(depositamount.getText()));
@@ -263,9 +333,14 @@ public class HelloController implements Initializable {
         }catch( TransactionsExceptions e){
             depositmessage.setText(e.toString());
         }
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+       System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void dowithdraw(ActionEvent event){
+        long start=System.currentTimeMillis();
         withdrawmesssage.setText("");
         try {
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).withdraw(Double.valueOf(withdrawamount.getText()));
@@ -273,9 +348,14 @@ public class HelloController implements Initializable {
         }catch(TransactionsExceptions ib){
             withdrawmesssage.setText(ib.toString());
         }
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+       System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void dotransfer(ActionEvent event){
+        long start=System.currentTimeMillis();
         transfermesssage.setText("");
         try{
             Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).transfer(Double.valueOf(transferamount.getText()), Integer.valueOf(transferreceiver.getText()));
@@ -283,20 +363,34 @@ public class HelloController implements Initializable {
         }catch(TransactionsExceptions ib){
             transfermesssage.setText(ib.toString());
         }
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gohomefrombalance(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) homebalance.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML
     void gotransactionhome(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) transactionmenu.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+       System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
 
 
@@ -307,10 +401,15 @@ public class HelloController implements Initializable {
     }
     @FXML
     void gosignup(ActionEvent event) throws Exception {
+        long start=System.currentTimeMillis();
         Stage stage = (Stage) signup.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("createAccount.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        long end=System.currentTimeMillis();
+        long elapsed=end-start;
+        System.out.println("Elapsedtime"+elapsed);
+        GlobalUser.setTime(elapsed+GlobalUser.getTime());
     }
     @FXML public TextField fName;
     @FXML public TextField mName;
@@ -329,6 +428,7 @@ public class HelloController implements Initializable {
     @FXML public Button confirmCreate;
     @FXML
     void doCreateAccount(ActionEvent event){
+        long start=System.currentTimeMillis();
         createmessage.setText("");
         try{
             if(passWord.getText().equals(rePassWord.getText())==false){
@@ -341,6 +441,11 @@ public class HelloController implements Initializable {
         }catch(NotMatchingPassword e){
             createmessage.setText("Unmatching passwords");
         }
+        long end=System.currentTimeMillis();
+        long elapsed=start-end;
+        System.out.println("Elapsedtime"+elapsed);
+
+
     }
     @FXML private Button shownot;
     @FXML
