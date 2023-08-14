@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static java.lang.Math.abs;
+
 public class HelloController implements Initializable {
     @FXML
     private Label welcomeText;
@@ -94,20 +96,29 @@ public class HelloController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws Exception{
+
         String tempEmail= emailtf.getText();
         String tempPasswd= passwdtf.getText();
+        long start=System.currentTimeMillis();
         Account current=Bank.check(tempEmail,tempPasswd);
         if(current==null){
             loginmessage.setText("Wrong Password or User does not exist");
         }else{
-            emailtf.clear();
-            passwdtf.clear();
             Stage stage = (Stage) login.getScene().getWindow();
             GlobalUser.setUserID(current.getUserName());
             GlobalUser.setUserPASS(current.getPassword());
-            Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-            stage.setScene(new Scene(root));
-            stage.show();
+
+
+                    emailtf.clear();
+                    passwdtf.clear();
+
+                    Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    long finish =System.currentTimeMillis();
+                    long ElapsedTime=start-finish;
+                    System.out.println("elapsedtime "+abs(ElapsedTime));
+                    GlobalUser.setTime(ElapsedTime+GlobalUser.getTime());
         }
     }
     @FXML
@@ -125,24 +136,6 @@ public class HelloController implements Initializable {
         balancetf.setText("");
         balancetf.setText(Bank.check(GlobalUser.getUserID(), GlobalUser.getUserPASS()).getBalance().toString());
     }
-
-    /*@FXML
-    void gohome(ActionEvent event) throws Exception {
-        String tmpU = email.getText();
-        String tmpP = passwd.getText();
-//        for (int i = 0; i < Program.getTourists().size(); i++) {
-//            if ((Program.getUserName().get(i).getUsername().equals(tmpU)) && (Program.getTourists().get(i).getPassword().equals(tmpP))) {
-//                try {
-//                    usernow.setText(tmpU);
-//                } catch (Exception e) {
-//
-//                }
-        Stage stage = (Stage) login.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
-        loginmessage.setText("Wrong Password or User does not exist");
-    }*/
 
     @FXML
     void gotransaction(ActionEvent event) throws Exception {

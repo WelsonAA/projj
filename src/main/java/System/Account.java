@@ -100,7 +100,7 @@ public class Account {
             Transfer t =new Transfer(amount,LocalDate.now(),receiverAccountNo,this.getBalance());
             Transactions.add(t);
             this.Balance -= amount;
-
+            Bank.check(receiverAccountNo).deposit(amount);
             this.notification+="Successful Transfer -"+amount+"\n";
         }
     }
